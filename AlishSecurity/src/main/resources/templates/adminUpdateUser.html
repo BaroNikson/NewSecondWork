@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update User (Admin)</title>
+</head>
+<body>
+<h2>Update User (Admin)</h2>
+
+<form th:action="@{'/admin/update/' + ${user.id}}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label>Name: <input type="text" th:field="*{name}" /></label><br>
+    <label>Surname: <input type="text" th:field="*{surname}" /></label><br>
+    <label>Department: <input type="text" th:field="*{department}" /></label><br>
+    <label>Salary: <input type="text" th:field="*{salary}" /></label><br>
+    <label>Role: <span th:text="${user.role}"></span></label><br> <!-- Показываем текущую роль пользователя -->
+    <input type="submit" value="Update User" />
+</form>
+
+<a th:href="@{/admin}">Back to Admin Panel</a>
+</body>
+</html>

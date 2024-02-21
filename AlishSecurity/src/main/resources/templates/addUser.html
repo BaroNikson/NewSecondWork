@@ -1,0 +1,22 @@
+<!-- src/main/resources/templates/addUser.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+</head>
+<body>
+<h2>Add User</h2>
+
+<form th:action="@{/users/add}" th:object="${user}" method="post">
+    <label>Name: <input type="text" th:field="*{name}" /></label><br>
+    <label>Surname: <input type="text" th:field="*{surname}" /></label><br>
+    <label>Department: <input type="text" th:field="*{department}" /></label><br>
+    <label>Salary: <input type="text" th:field="*{salary}" /></label><br>
+    <input type="submit" value="Add User" />
+</form>
+
+<a th:href="@{/users}">Back to User List</a>
+</body>
+</html>

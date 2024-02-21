@@ -1,0 +1,20 @@
+<!-- src/main/resources/templates/userDetails.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+</head>
+<body>
+<h2>User Details</h2>
+
+<p>ID: <span th:text="${user.id}"></span></p>
+<p>Name: <span th:text="${user.name}"></span></p>
+<p>Surname: <span th:text="${user.surname}"></span></p>
+<p>Department: <span th:text="${user.department}"></span></p>
+<p>Salary: <span th:text="${user.salary}"></span></p>
+
+<a th:href="@{/users}">Back to User List</a>
+</body>
+</html>
