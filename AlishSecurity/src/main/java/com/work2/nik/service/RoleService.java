@@ -11,4 +11,5 @@ public interface RoleService {
     void addRole(Role role);
     void updateRole(Long id, Role updatedRole);
     void deleteRole(Long id);
+    Role getRoleByName(String roleName);
 }

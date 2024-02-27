@@ -53,4 +53,12 @@ public class RoleServiceImpl implements RoleService {
     public void deleteRole(Long id) {
         roleDAO.deleteRole(id);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Role getRoleByName(String roleName) {
+        return roleDAO.getRoleByName(roleName);
+    }
+
+
 }

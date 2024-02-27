@@ -171,4 +171,7 @@ public class User implements UserDetails {
         // Ваша логика для проверки, включена ли учетная запись
         return true; // Пример: всегда возвращаем true
     }
+    public String getLogin() {
+        return getUsername();
+    }
 }

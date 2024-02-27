@@ -2,47 +2,49 @@ package com.work2.nik.config;
 
 import com.work2.nik.models.Role;
 import com.work2.nik.models.User;
-import com.work2.nik.repository.RoleRepository;
-import com.work2.nik.repository.UserRepository;
+import com.work2.nik.service.RoleService;
+import com.work2.nik.service.UserService;
+
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.HashSet;
-
+import java.util.Set;
 
 @Component
 public class DataInitializer {
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
+    private final UserService userService;
+    private final RoleService roleService;
 
-    public DataInitializer(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+    public DataInitializer(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
     }
 
     @PostConstruct
     public void initData() {
         // Проверяем наличие ролей в базе данных
-        if (roleRepository.count() == 0) {
+        if (roleService.getAllRoles().isEmpty()) {
             Role adminRole = new Role("ADMIN");
             Role userRole = new Role("USER");
-            roleRepository.saveAll(Arrays.asList(adminRole, userRole));
+            roleService.addRole(adminRole);
+            roleService.addRole(userRole);
         }
 
         // Проверяем наличие пользователей в базе данных
-        if (userRepository.count() == 0) {
+        if (userService.getAllUsers().isEmpty()) {
             // Создаем пользователей и связываем их с ролями
-            Role adminRole = roleRepository.findByName("ADMIN");
-            Role userRole = roleRepository.findByName("USER");
+            Role adminRole = roleService.getRoleByName("ADMIN");
+            Role userRole = roleService.getRoleByName("USER");
 
             User adminUser = new User("admin", "adminPassword");
             adminUser.setRoles(new HashSet<>(Arrays.asList(adminRole, userRole)));
-            userRepository.save(adminUser);
+            userService.addUser(adminUser);
 
             User regularUser = new User("user", "userPassword");
             regularUser.setRoles(new HashSet<>(Arrays.asList(userRole)));
-            userRepository.save(regularUser);
+            userService.addUser(regularUser);
         }
     }
 }

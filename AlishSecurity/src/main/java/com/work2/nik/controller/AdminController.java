@@ -3,6 +3,7 @@ package com.work2.nik.controller;
 
 import com.work2.nik.models.User;
 import com.work2.nik.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,5 +63,16 @@ public class AdminController {
     public String deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
         return "redirect:/admin/users";
+    }
+    @PostMapping("/{username}/roles/{roleName}")
+    public ResponseEntity<?> assignRoleToUser(@PathVariable String username, @PathVariable String roleName) {
+        userService.assignRoleToUser(username, roleName);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{username}/roles/{roleName}")
+    public ResponseEntity<?> removeRoleFromUser(@PathVariable String username, @PathVariable String roleName) {
+        userService.removeRoleFromUser(username, roleName);
+        return ResponseEntity.ok().build();
     }
 }

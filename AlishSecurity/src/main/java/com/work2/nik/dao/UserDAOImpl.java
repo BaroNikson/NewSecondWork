@@ -3,6 +3,7 @@ package com.work2.nik.dao;
 
 import com.work2.nik.models.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,6 +33,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
+    @Transactional
     public void updateUser(int id, User updatedUser) {
         User user = entityManager.find(User.class, id);
         if (user != null) {
@@ -41,6 +43,7 @@ public class UserDAOImpl implements UserDAO {
             user.setSalary(updatedUser.getSalary());
         }
     }
+
 
     @Override
     public void deleteUser(int id) {

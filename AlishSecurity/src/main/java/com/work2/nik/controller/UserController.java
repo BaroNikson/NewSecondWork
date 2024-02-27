@@ -5,10 +5,7 @@ import com.work2.nik.models.User;
 import com.work2.nik.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,10 +41,11 @@ public class UserController {
 
     @PostMapping("/update")
     public String updateUser(@ModelAttribute User updatedUser) {
-        int id = updatedUser.getId();
-        userService.updateUser(id, updatedUser);
-        return "redirect:/users";
+        int id = updatedUser.getId(); // Получаем идентификатор пользователя из обновленного объекта
+        userService.updateUser(id, updatedUser); // Передаем обновленного пользователя в сервис
+        return "redirect:/users"; // Перенаправляем на страницу с пользователями
     }
+
 
     @GetMapping("/add")
     public String showAddUserForm(Model model) {
@@ -79,4 +77,6 @@ public class UserController {
 
         return "login";
     }
+
+
 }

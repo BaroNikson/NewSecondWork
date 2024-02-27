@@ -39,4 +39,12 @@ public class RoleDAOImpl implements RoleDAO {
             entityManager.remove(role);
         }
     }
+
+
+    @Override
+    public Role getRoleByName(String roleName) {
+        return entityManager.createQuery("SELECT r FROM Role r WHERE r.name = :roleName", Role.class)
+                .setParameter("roleName", roleName)
+                .getSingleResult();
+    }
 }

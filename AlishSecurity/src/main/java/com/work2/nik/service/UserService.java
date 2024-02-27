@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface UserService {
     List<User> getAllUsers();
+    List<String> getAllUserLogins();
 
     User getUserById(int id);
 
@@ -15,4 +16,7 @@ public interface UserService {
 
     void deleteUser(int id);
     void changePassword(int id, String newPassword);
+    void assignRoleToUser(String username, String roleName);
+
+    void removeRoleFromUser(String username, String roleName);
 }
